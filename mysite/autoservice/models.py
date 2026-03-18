@@ -31,7 +31,7 @@ class Order(models.Model):
 class OrderLine(models.Model):
     order = models.ForeignKey(to="Order", on_delete=models.CASCADE)
     service = models.ForeignKey(to="Service", on_delete=models.SET_NULL, null=True, blank=True)
-    quantity = models.IntegerField()
+    quantity = models.IntegerField(default=1)
 
     def __str__(self):
         return f"{self.service} - {self.quantity}"
