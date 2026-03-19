@@ -2,8 +2,12 @@ from django.db import models
 
 
 class Service(models.Model):
-    name = models.CharField()
-    price = models.DecimalField(max_digits=5, decimal_places=2)
+    name = models.CharField(verbose_name="Pavadinimas")
+    price = models.DecimalField(verbose_name="Kaina", max_digits=5, decimal_places=2)
+
+    class Meta:
+        verbose_name = "Paslauga"
+        verbose_name_plural = "Paslaugos"
 
     def __str__(self):
         return self.name
