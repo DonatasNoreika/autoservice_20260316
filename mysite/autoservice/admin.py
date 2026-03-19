@@ -8,7 +8,7 @@ class OrderLineInLine(admin.TabularInline):
     fields = ['service', 'quantity', 'line_sum']
 
 class OrderAdmin(admin.ModelAdmin):
-    list_display = ['car', 'date']
+    list_display = ['car', 'date', 'total']
     inlines = [OrderLineInLine]
 
 
