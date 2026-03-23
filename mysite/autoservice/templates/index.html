@@ -1,13 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Mūsų autoservisas</title>
-</head>
-<body>
+{% extends 'base.html' %}
+
+{% block title %}Mūsų autoservisas{% endblock %}
+
+{% block heading %}Statistika{% endblock %}
+
+{% block content %}
 <h1>Mūsų autoserviso statistika:</h1>
 <p><b>Atliekamų paslaugų:</b> {{ services }}</p>
 <p><b>Registruotų automobilių:</b> {{ cars }}</p>
 <p><b>Atliktų užsakymų:</b> {{ orders_done }}</p>
-</body>
-</html>
+{% endblock %}
