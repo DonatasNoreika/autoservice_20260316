@@ -14,3 +14,10 @@ def cars(request):
         'cars': Car.objects.all(),
     }
     return render(request, template_name="cars.html", context=context)
+
+
+def car(request, car_pk):
+    context = {
+        'car': Car.objects.get(pk=car_pk)
+    }
+    return render(request, template_name="car.html", context=context)
