@@ -7,7 +7,7 @@
 {% block content %}
 
 {% for order in orders %}
-<p>{{ order }}</p>
+<p><a href="{{ order.pk }}">{{ order }}</a></p>
 {% endfor %}
 
 {% endblock %}

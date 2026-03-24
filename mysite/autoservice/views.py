@@ -28,3 +28,9 @@ class OrderListView(generic.ListView):
     model = Order
     template_name = "orders.html"
     context_object_name = "orders"
+
+
+class OrderDetailView(generic.DetailView):
+    model = Order
+    template_name = 'order.html'
+    context_object_name = 'order'
