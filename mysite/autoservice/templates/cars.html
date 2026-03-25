@@ -5,10 +5,25 @@
 {% block heading %}Automobiliai{% endblock %}
 
 {% block content %}
-
+{% load static %}
+<div class="row">
 {% for car in cars %}
-<p><a href="{% url 'car' car.pk %}">{{ car }}</a></p>
+<div class="col-md-4 d-flex align-items-stretch">
+    <div class="card mb-4 shadow-sm" style="width:300px">
+        {% if car.photo %}
+        <img src="{{ car.photo.url }}" class="card-img-top" alt="...">
+        {% else %}
+        <img src="{% static 'img/no-image.png' %}" class="card-img-top">
+        {% endif %}
+        <div class="card-body">
+            <h6 class="card-subtitle mb-2 text-muted">{{ car.make }} {{ car.model}} </h6>
+            <p class="card-text"><a href="{{ car.pk }}">{{ car.license_plate }}</a></p>
+        </div>
+    </div>
+</div>
+<!--<p><a href="{% url 'car' car.pk %}">{{ car }}</a></p>-->
 {% endfor %}
+</div>
 
 {% if cars.has_other_pages %}
 <div class="container">
