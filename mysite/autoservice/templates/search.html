@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %}Paieškos rezultatai{% endblock %}
+
+{% block heading %}Paieškos rezultatai{% endblock %}
+
+{% block content %}
+<h3>Paieškos rezultatai pagal užklausą "{{ query }}":</h3>
+
+{% for car in cars %}
+<p><a href="{% url 'car' car.pk %}">{{ car }}</a></p>
+{% empty %}
+<p>Nerasta automobilių</p>
+{% endfor %}
+{% endblock %}
