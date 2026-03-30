@@ -1,3 +1,4 @@
+from django.contrib.auth.models import User
 from django.db import models
 
 
@@ -40,6 +41,9 @@ class Order(models.Model):
     ]
 
     status = models.CharField(choices=STATUS_CHOICES, default='a')
+    client = models.ForeignKey(to=User,
+                               on_delete=models.SET_NULL,
+                               null=True, blank=True)
 
     def total(self):
         return sum(line.line_sum() for line in self.lines.all())
