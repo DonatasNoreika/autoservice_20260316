@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block title %}Mano taisymai{% endblock %}
+
+{% block heading %}Mano taisymai{% endblock %}
+
+{% block content %}
+
+{% for order in orders %}
+<p><a href="{% url 'order' order.pk %}">{{ order }}</a></p>
+{% endfor %}
+
+{% endblock %}

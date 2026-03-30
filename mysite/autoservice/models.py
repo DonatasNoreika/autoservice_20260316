@@ -67,3 +67,4 @@ class OrderLine(models.Model):
 
     def __str__(self):
         return f"{self.service} ({self.service.price}) * {self.quantity} = {self.line_sum()}"
+
