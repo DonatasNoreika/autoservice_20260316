@@ -1,5 +1,6 @@
 from django.contrib.auth.models import User
 from django.db import models
+from django.utils import timezone
 
 
 class Service(models.Model):
@@ -45,6 +46,9 @@ class Order(models.Model):
     client = models.ForeignKey(to=User,
                                on_delete=models.SET_NULL,
                                null=True, blank=True)
+
+    def is_overdue(self):
+        return self.deadline < timezone.now()
 
     def total(self):
         return sum(line.line_sum() for line in self.lines.all())
