@@ -32,6 +32,7 @@ class Order(models.Model):
                             null=True, blank=True,
                             related_name="orders")
     date = models.DateTimeField(auto_now_add=True)
+    deadline = models.DateTimeField()
 
     STATUS_CHOICES = [
         ('a', 'Administered'),
