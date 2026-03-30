@@ -12,6 +12,7 @@
 <p>Valstybinis numeris: {{ car.license_plate }}</p>
 <p>VIN kodas: {{ car.vin_code }}</p>
 <p>Kliento vardas: {{ car.client_name }}</p>
+<p>{{ car.description | safe }}</p>
 <hr>
 <h3>Taisymai:</h3>
 {% for order in car.orders.all %}
