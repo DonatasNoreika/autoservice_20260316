@@ -70,3 +70,13 @@ class OrderLine(models.Model):
     def __str__(self):
         return f"{self.service} ({self.service.price}) * {self.quantity} = {self.line_sum()}"
 
+
+class OrderComment(models.Model):
+    order = models.ForeignKey(to="Order", on_delete=models.CASCADE, related_name="comments")
+    author = models.ForeignKey(to=User, on_delete=models.CASCADE)
+    content = models.TextField()
+    date_created = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ['-pk']
+
