@@ -14,6 +14,24 @@
 <p>Kliento vardas: {{ car.client_name }}</p>
 <p>{{ car.description | safe }}</p>
 <hr>
+{% if user.is_authenticated %}
+<h2>Palikite atsiliepimą</h2>
+<form method="post" class="mb-2">
+    {% csrf_token %}
+    {% load crispy_forms_tags %}
+    {{ form | crispy }}
+    <button type="submit" class="btn btn-primary">Paskelbti</button>
+</form>
+{% endif %}
+
+{% if car.comments.all %}
+{% for comment in car.comments.all %}
+<p><strong>{{ comment.author }}</strong>, <em>{{ comment.date_created }}</em></p>
+<p>{{ comment.content }}</p>
+{% endfor %}
+{% endif %}
+
+<hr>
 <h3>Taisymai:</h3>
 {% for order in car.orders.all %}
 <p><a href="{% url 'order' order.pk %}">{{ order }}</a></p>

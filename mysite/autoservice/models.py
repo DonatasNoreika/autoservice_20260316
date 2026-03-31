@@ -28,6 +28,15 @@ class Car(models.Model):
     def __str__(self):
         return f"{self.make} {self.model} ({self.license_plate})"
 
+class CarComment(models.Model):
+    car = models.ForeignKey(to="Car", on_delete=models.CASCADE, related_name="comments")
+    author = models.ForeignKey(to=User, on_delete=models.CASCADE)
+    content = models.TextField()
+    date_created = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ['-pk']
+
 
 class Order(models.Model):
     car = models.ForeignKey(to="Car",

@@ -1,4 +1,4 @@
-from django.shortcuts import render, reverse
+from django.shortcuts import render, reverse, redirect, get_object_or_404
 from django.views.generic.edit import FormMixin
 from .models import Service, Car, Order
 from django.views import generic
@@ -7,7 +7,7 @@ from django.db.models import Q
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.forms import UserCreationForm
 from django.urls import reverse_lazy
-from .forms import OrderCommentForm
+from .forms import OrderCommentForm, CarCommentForm
 
 def index(request):
     num_visits = request.session.get('num_visits', 1)
@@ -32,8 +32,16 @@ def cars(request):
 
 
 def car(request, car_pk):
+    form = CarCommentForm(request.POST or None)
+    car = Car.objects.get(pk=car_pk)
+    if form.is_valid():
+        form.instance.author = request.user
+        form.instance.car = car
+        form.save()
+        return redirect(reverse("car", kwargs={"car_pk": car_pk}))
     context = {
-        'car': Car.objects.get(pk=car_pk)
+        'car': car,
+        'form': form,
     }
     return render(request, template_name="car.html", context=context)
 
