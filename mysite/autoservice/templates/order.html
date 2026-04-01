@@ -8,7 +8,12 @@
 <h1>{{ order.car }}</h1>
 <p>Data: {{ order.date }}</p>
 <p>Terminas: <span class="{% if order.is_overdue %}text-danger{% endif %}">{{ order.deadline }}</span></p>
-<p>Klientas: {{ order.client.username }}</p>
+<p>Klientas:
+    {% if order.client.profile.photo %}
+    <img src="{{ order.client.profile.photo.url }}" class="rounded-circle" style="width: 30px">
+    {% endif %}
+    {{ order.client.username }}
+</p>
 <p>Būsena: {{ order.get_status_display }}</p>
 
 <table class="table table-hover">
@@ -46,7 +51,13 @@
 {% endif %}
 {% if order.comments.all %}
 {% for comment in order.comments.all %}
-<p><strong>{{ comment.author }}</strong>, <em>{{ comment.date_created }}</em></p>
+<p>
+    {% if comment.author.profile.photo %}
+    <img src="{{ comment.author.profile.photo.url }}" class="rounded-circle" style="width: 30px">
+    {% endif %}
+    <strong>{{ comment.author }}</strong>,
+    <em>{{ comment.date_created }}</em>
+</p>
 <p>{{ comment.content }}</p>
 {% endfor %}
 {% endif %}
