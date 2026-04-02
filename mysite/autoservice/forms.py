@@ -23,8 +23,24 @@ class ProfileChangeForm(forms.ModelForm):
         model = Profile
         fields = ['photo']
 
+# class OrderCreateUpdateForm(forms.ModelForm):
+#     class Meta:
+#         model = Order
+#         fields = ['car', 'deadline', 'status']
+#         widgets = {'deadline': forms.DateInput(attrs={'type': 'datetime-local'})}
+
 class OrderCreateUpdateForm(forms.ModelForm):
     class Meta:
         model = Order
         fields = ['car', 'deadline', 'status']
-        widgets = {'deadline': forms.DateInput(attrs={'type': 'datetime-local'})}
+        widgets = {
+            'deadline': forms.DateTimeInput(
+                attrs={'type': 'datetime-local'},
+                format='%Y-%m-%dT%H:%M'
+            )
+        }
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        # Kad POST metu ir validacijoje naudotų tą patį datetime-local formatą
+        self.fields['deadline'].input_formats = ['%Y-%m-%dT%H:%M']
