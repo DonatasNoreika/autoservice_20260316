@@ -17,9 +17,13 @@
 <p>Būsena: {{ order.get_status_display }}</p>
 
 {% if order.client == user %}
-<div>
+<div class="mb-2">
     <a href="{% url 'order_update' order.pk %}" class="btn btn-warning">Redaguoti</a>
     <a href="{% url 'order_delete' order.pk %}" class="btn btn-danger">Ištrinti</a>
+</div>
+<div>
+    <a href="{% url 'orderline_create' order.pk %}" class="btn btn-secondary">Pridėti paslaugą</a>
+
 </div>
 {% endif %}
 
