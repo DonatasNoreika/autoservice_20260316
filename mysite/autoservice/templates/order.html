@@ -19,6 +19,7 @@
 {% if order.client == user %}
 <div>
     <a href="{% url 'order_update' order.pk %}" class="btn btn-warning">Redaguoti</a>
+    <a href="{% url 'order_delete' order.pk %}" class="btn btn-danger">Ištrinti</a>
 </div>
 {% endif %}
 
