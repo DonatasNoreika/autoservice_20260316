@@ -8,7 +8,11 @@ from django.db.models import Q
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.forms import UserCreationForm
 from django.urls import reverse_lazy
-from .forms import OrderCommentForm, CarCommentForm, UserChangeForm, ProfileChangeForm
+from .forms import (OrderCommentForm,
+                    CarCommentForm,
+                    UserChangeForm,
+                    ProfileChangeForm,
+                    OrderCreateUpdateForm)
 
 def index(request):
     num_visits = request.session.get('num_visits', 1)
@@ -51,7 +55,7 @@ class OrderListView(generic.ListView):
     model = Order
     template_name = "orders.html"
     context_object_name = "orders"
-    paginate_by = 2
+    paginate_by = 5
 
 
 class OrderDetailView(FormMixin, generic.DetailView):
@@ -117,3 +121,16 @@ def profile(request):
         'p_form': p_form,
     }
     return render(request, template_name="profile.html", context=context)
+
+
+class OrderCreateView(LoginRequiredMixin, generic.CreateView):
+    model = Order
+    template_name = "order_form.html"
+    form_class = OrderCreateUpdateForm
+    success_url = reverse_lazy("user_orders")
+
+    def form_valid(self, form):
+        form.instance.client = self.request.user
+        form.save()
+        return super().form_valid(form)
+

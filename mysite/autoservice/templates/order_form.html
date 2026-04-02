@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %}Taisymo kūrimas/redagavimas{% endblock %}
+
+{% block heading %}Taisymo kūrimas/redagavimas{% endblock %}
+
+{% block content %}
+<form method="post">
+    {% csrf_token %}
+    {% load crispy_forms_tags %}
+    {{ form | crispy }}
+    <button type="submit" class="btn btn-secondary">Išsaugoti</button>
+</form>
+
+{% endblock %}

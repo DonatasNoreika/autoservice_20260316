@@ -5,7 +5,9 @@
 {% block heading %}Mano taisymai{% endblock %}
 
 {% block content %}
-
+<div class="mb-2">
+    <a href="{% url 'order_create' %}" class="btn btn-secondary">Naujas taisymas</a>
+</div>
 {% for order in orders %}
 <p><a href="{% url 'order' order.pk %}">{{ order.car }}</a><span class="{% if order.is_overdue %}text-danger{% endif %}"> - {{ order.deadline }}</span></p>
 {% endfor %}
