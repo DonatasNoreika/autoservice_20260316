@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block title %}Paslaugos pašalinimas{% endblock %}
+
+{% block heading %}Paslaugos pašalinimas{% endblock %}
+
+{% block content %}
+<p>Ar tikrai norite pašalinti paslaug1 "{{ orderline }}"?</p>
+<form method="post">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-primary">Taip</button>
+    <a href="{% url 'order' orderline.order.pk %}" class="btn btn-secondary">Ne</a>
+</form>
+{% endblock %}
